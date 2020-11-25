@@ -1,5 +1,5 @@
 # We reduced many lines of code to set up NodeJS by abstracting all of it into a base image
-FROM YOUR_DOCKER_HUB/base-image-node:latest
+FROM hashemfay/base-image-node:latest
 
 # Create app directory
 WORKDIR /usr/src/app

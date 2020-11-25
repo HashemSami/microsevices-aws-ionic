@@ -38,3 +38,7 @@ jobs:
       name: "Deploy App"
       env:
         - IMAGE_NAME="udacity-c2-frontend"
+    - <<: *DEPLOY_SERVICE_JOB
+      name: "Deploy Reverse Proxy"
+      env:
+        - IMAGE_NAME="reverse-proxy"
