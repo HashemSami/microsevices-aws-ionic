@@ -1,5 +1,5 @@
-# We reduced many lines of code to set up NodeJS by abstracting all of it into a base image
-FROM hashemfay/base-image-node:latest
+## Build
+FROM beevelop/ionic:latest AS ionic
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -20,5 +20,8 @@ RUN ionic build
 # Bind the port that the image will run on
 EXPOSE 8080
 
-# Start the app
-CMD [ "npm", "start" ]
+## Run
+FROM nginx:alpine
+
+#COPY www /usr/share/nginx/html
+COPY --from=ionic  /usr/src/app/www /usr/share/nginx/html
