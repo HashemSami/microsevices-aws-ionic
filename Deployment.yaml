@@ -20,7 +20,7 @@ spec:
           ports:
             - containerPort: 80
         - name: feed-api
-          image: hashemfay/user-api
+          image: hashemfay/feed-api
           ports:
             - containerPort: 80
         - name: udacity-c2-frontend
