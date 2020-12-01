@@ -27,3 +27,7 @@ spec:
           image: hashemfay/udacity-c2-frontend
           ports:
             - containerPort: 80
+        - name: reverse-proxy
+          image: hashemfay/reverse-proxy
+          ports:
+            - containerPort: 80

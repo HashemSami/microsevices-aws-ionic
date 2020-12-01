@@ -1,9 +1,37 @@
-import { Router, Request, Response } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import { FeedItem } from "../models/FeedItem";
-import { requireAuth } from "../../users/routes/auth.router";
+// import { requireAuth } from "../../users/routes/auth.router";
+import { config } from "../../../../config/config";
 import * as AWS from "../../../../aws";
+import * as jwt from "jsonwebtoken";
 
 const router: Router = Router();
+
+const c = config.jwt;
+
+export function requireAuth(req: Request, res: Response, next: NextFunction) {
+  // this will chack the header information we provided in the jwt before to the user when we singup the user to our app
+  if (!req.headers || !req.headers.authorization) {
+    return res.status(401).send({ message: "No authorization headers." });
+  }
+
+  // the jwt will be on the format of
+  // Bearer kjd;flkhjdf;ghkldf;jkhg;dfklj'sldofjlkj
+  // so will split the token from the brearer then have more check the information
+  const token_bearer = req.headers.authorization.split(" ");
+  if (token_bearer.length != 2) {
+    return res.status(401).send({ message: "Malformed token." });
+  }
+
+  const token = token_bearer[1];
+
+  return jwt.verify(token, c.secret, (err: any, decoded: any) => {
+    if (err) {
+      return res.status(500).send({ auth: false, message: "Failed to authenticate." });
+    }
+    return next();
+  });
+}
 
 // Get all feed items
 router.get("/", async (req: Request, res: Response) => {
