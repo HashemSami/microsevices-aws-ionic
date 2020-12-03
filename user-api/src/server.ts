@@ -12,13 +12,17 @@ import { V0MODELS } from "./controllers/v0/model.index";
 const cors = require("cors");
 
 (async () => {
-  // adding the models specified in model.index
-  await sequelize.addModels(V0MODELS);
-  // making the connection between our server and our data base
-  // it also makes sure that our database is in sync with our models we have
-  // if sequelize and our data store are not allignd we will have issuse
-  // it will do that by checking the migration file wich will hve the latest form of data
-  await sequelize.sync();
+  try {
+    // adding the models specified in model.index
+    await sequelize.addModels(V0MODELS);
+    // making the connection between our server and our data base
+    // it also makes sure that our database is in sync with our models we have
+    // if sequelize and our data store are not allignd we will have issuse
+    // it will do that by checking the migration file wich will hve the latest form of data
+    await sequelize.sync();
+  } catch (e) {
+    console.log(e.message);
+  }
 
   const app = express();
   const port = process.env.PORT || 8080; // default port to listen
