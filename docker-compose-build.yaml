@@ -3,7 +3,7 @@ services:
   reverseproxy:
     build:
       context: reverse-proxy
-    image: noahross/reverse-proxy
+    image: hashemfay/reverse-proxy
   backend_user:
     build:
       context: feed-api
