@@ -25,6 +25,10 @@ deploy_service_job: &DEPLOY_SERVICE_JOB # Pre-testing installs
     - echo "no tests"
 
   script:
+    - docker tag ${USER_IMAGE} hashemfay/${USER_IMAGE}:latest
+    - docker tag ${FEED_IMAGE} hashemfay/${FEED_IMAGE}:latest
+    - docker tag ${FRONTEND_IMAGE} hashemfay/${FRONTEND_IMAGE}:latest
+    - docker tag ${REVERSEPROXY_IMAGE} hashemfay/${REVERSEPROXY_IMAGE}:latest
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - docker push hashemfay/${USER_IMAGE}
     - docker push hashemfay/${FEED_IMAGE}
