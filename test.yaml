@@ -1,0 +1,44 @@
+language: minimal
+
+services:
+  - docker
+
+env:
+  - DOCKER_COMPOSE_VERSION=1.23.2
+
+deploy_service_job: &DEPLOY_SERVICE_JOB # Pre-testing installs
+
+  before_install:
+    - docker -v && docker-compose -v
+    - sudo rm /usr/local/bin/docker-compose
+    - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+    - chmod +x docker-compose
+    - sudo mv docker-compose /usr/local/bin
+    - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+    - chmod +x ./kubectl
+    - sudo mv ./kubectl /usr/local/bin/kubectl
+
+  install:
+    - docker-compose -f deployment/docker-compose-build.yaml build --parallel
+
+  # Scripts to be run such as tests
+  before_script:
+    - echo "no tests"
+
+  script:
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker push hashemfay/${USER_IMAGE}
+    - docker push hashemfay/${FEED_IMAGE}
+    - docker push hashemfay/${FRONTEND_IMAGE}
+    - docker push hashemfay/${REVERSEPROXY_IMAGE}
+
+jobs:
+  include:
+    - <<: *DEPLOY_SERVICE_JOB
+      name: "Deploy"
+      if: branch = main
+      env:
+        - USER_IMAGE="user-api"
+        - FEED_IMAGE="feed-api"
+        - FRONTEND_IMAGE="udacity-c2-frontend"
+        - REVERSEPROXY_IMAGE="reverse-proxy"
