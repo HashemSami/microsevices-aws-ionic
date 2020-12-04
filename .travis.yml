@@ -25,6 +25,9 @@ deploy_service_job: &DEPLOY_SERVICE_JOB # Pre-testing installs
     - echo "no tests"
 
   script:
+    - echo "no script"
+
+  after_success:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - docker push hashemfay/${USER_IMAGE}
     - docker push hashemfay/${FEED_IMAGE}
