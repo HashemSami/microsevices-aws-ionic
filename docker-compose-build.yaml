@@ -2,17 +2,17 @@ version: "3"
 services:
   reverseproxy:
     build:
-      context: ../reverse-proxy
+      context: reverse-proxy
     image: noahross/reverse-proxy
   backend_user:
     build:
-      context: ../feed-api
+      context: feed-api
     image: hashemfay/feed-api
   backend_feed:
     build:
-      context: ../user-api
+      context: user-api
     image: hashemfay/user-api
   frontend:
     build:
-      context: ../udacity-c2-frontend
+      context: udacity-c2-frontend
     image: hashemfay/udacity-c2-frontend:prod
