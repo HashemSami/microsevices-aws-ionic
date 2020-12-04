@@ -8,11 +8,11 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: backend-feed
+      service: backend-feed
   template:
     metadata:
       labels:
-        app: backend-feed
+        service: backend-feed
     spec:
       containers:
         - name: backend-feed
@@ -73,7 +73,7 @@ spec:
                   key: POSTGRESS_USERNAME
           volumeMounts:
             - name: aws-secret
-              mountPath: "/root/.aws/"
+              mountPath: "~/.aws/"
               readOnly: true
       restartPolicy: Always
       volumes:

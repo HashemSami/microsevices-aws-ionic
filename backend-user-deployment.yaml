@@ -8,11 +8,11 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: backend-user
+      service: backend-user
   template:
     metadata:
       labels:
-        app: backend-user
+        service: backend-user
     spec:
       containers:
         - name: backend-user
@@ -73,7 +73,7 @@ spec:
                   key: POSTGRESS_USERNAME
           volumeMounts:
             - name: aws-secret
-              mountPath: "/root/.aws/"
+              mountPath: "~/.aws/"
               readOnly: true
       restartPolicy: Always
       volumes:

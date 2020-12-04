@@ -35,3 +35,4 @@ UserInterfaceState.xcuserstate
 node_modules
 env-config.yaml
 env-secret.yaml
+aws-secret.yaml
