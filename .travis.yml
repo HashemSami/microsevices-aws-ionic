@@ -38,7 +38,7 @@ jobs:
   include:
     - <<: *DEPLOY_SERVICE_JOB
       name: "Deploy"
-      if: branch = master
+      if: branch = main
       env:
         - USER_IMAGE="user-api"
         - FEED_IMAGE="feed-api"
