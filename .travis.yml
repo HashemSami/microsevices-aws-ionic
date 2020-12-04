@@ -11,7 +11,7 @@ deploy_service_job: &DEPLOY_SERVICE_JOB # Pre-testing installs
   before_install:
     - docker -v && docker-compose -v
     # - sudo rm /usr/bin/docker-compose
-    - curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
+    - sudo curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
     - sudo chmod +x /usr/bin/docker-compose
     - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
     - chmod +x ./kubectl
