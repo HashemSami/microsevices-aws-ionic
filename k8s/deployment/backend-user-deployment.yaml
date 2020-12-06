@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-feed
+  name: backend-user
   labels:
-    service: backend-feed
+    service: backend-user
 spec:
   replicas: 2
   selector:
     matchLabels:
-      service: backend-feed
+      service: backend-user
   template:
     metadata:
       labels:
-        service: backend-feed
+        service: backend-user
     spec:
       containers:
-        - name: backend-feed
-          image: hashemfay/feed-api
+        - name: backend-user
+          image: hashemfay/user-api
           imagePullPolicy: "Always"
           resources:
             requests:
@@ -56,27 +56,21 @@ spec:
                 configMapKeyRef:
                   name: env-config
                   key: POSTGRES_DATABASE
-            - name: POSTGRESS_HOST
+            - name: POSTGRES_HOST
               valueFrom:
                 configMapKeyRef:
                   name: env-config
-                  key: POSTGRESS_HOST
-            - name: POSTGRESS_PASSWORD
+                  key: POSTGRES_HOST
+            - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: env-secret
-                  key: POSTGRESS_PASSWORD
-            - name: POSTGRESS_USERNAME
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: env-secret
-                  key: POSTGRESS_USERNAME
-          volumeMounts:
-            - name: aws-secret
-              mountPath: "~/.aws/"
-              readOnly: true
+                  key: POSTGRES_USERNAME
+      imagePullSecrets:
+        - name: regcred
       restartPolicy: Always
-      volumes:
-        - name: aws-secret
-          secret:
-            secretName: aws-secret

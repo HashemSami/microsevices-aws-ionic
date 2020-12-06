@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: frontend
   labels:
-    service: reverseproxy
-  name: reverseproxy
+    service: frontend
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: reverseproxy
+      service: frontend
   template:
     metadata:
       labels:
-        app: reverseproxy
+        service: frontend
     spec:
       containers:
-        - image: hashemfay/reverse-proxy
-          name: reverseproxy
-          imagePullPolicy: Always
+        - name: frontend
+          image: hashemfay/udacity-c2-frontend
+          imagePullPolicy: "Always"
           resources:
             requests:
               memory: "64Mi"
@@ -25,6 +25,5 @@ spec:
             limits:
               memory: "1024Mi"
               cpu: "500m"
-          ports:
-            - containerPort: 8080
-      restartPolicy: Always
+      imagePullSecrets:
+        - name: regcred
