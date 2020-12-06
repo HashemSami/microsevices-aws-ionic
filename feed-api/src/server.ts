@@ -8,6 +8,8 @@ import bodyParser from "body-parser";
 
 import { V0MODELS } from "./controllers/v0/model.index";
 
+import { config } from "./config/config";
+
 // Cors for cross origin allowance
 const cors = require("cors");
 
@@ -33,7 +35,7 @@ const cors = require("cors");
 
   //CORS Should be restricted
   app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:8100");
+    res.header("Access-Control-Allow-Origin", config.url);
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     next();
   });

@@ -13,5 +13,6 @@ export const config = {
   },
   jwt: {
     secret: process.env.JWT_SECRET
-  }
+  },
+  url: process.env.URL
 };
