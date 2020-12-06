@@ -15,4 +15,4 @@ services:
   frontend:
     build:
       context: udacity-c2-frontend
-    image: hashemfay/udacity-c2-frontend:prod
+    image: hashemfay/udacity-c2-frontend

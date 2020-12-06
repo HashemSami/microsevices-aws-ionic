@@ -37,6 +37,6 @@ services:
       JWT_TOKEN: $JWT_TOKEN
       URL: "http://localhost:8100"
   frontend:
-    image: hashemfay/udacity-c2-frontend:local
+    image: hashemfay/udacity-c2-frontend
     ports:
       - "8100:80"
