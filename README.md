@@ -20,7 +20,7 @@ This project for the Udacity Cloud Devoleper Nanodegree. Where we took an existi
 
 - If you don't have Nodejs installed yet. you'll need to [download Node.js](https://nodejs.org/en/download/) to be able to use this application.
 - You'll also need to [install Ionic](https://ionicframework.com/docs/intro/cli) framework
-- [Install docker] (https://docs.docker.com/install/) to setup your docker environment.
+- [Install docker](https://docs.docker.com/install/) to setup your docker environment.
 
 ### Installing project dependencies
 
