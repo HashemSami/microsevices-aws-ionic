@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: hashemfay/udacity-c2-frontend
+          image: hashemfay/udacity-c2-frontend:latest
           imagePullPolicy: "Always"
           resources:
             requests:

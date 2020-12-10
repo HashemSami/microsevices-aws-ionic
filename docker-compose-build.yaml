@@ -3,16 +3,16 @@ services:
   reverseproxy:
     build:
       context: reverse-proxy
-    image: hashemfay/reverse-proxy
+    image: hashemfay/reverse-proxy:latest
   backend_user:
     build:
       context: feed-api
-    image: hashemfay/feed-api
+    image: hashemfay/feed-api:latest
   backend_feed:
     build:
       context: user-api
-    image: hashemfay/user-api
+    image: hashemfay/user-api:latest
   frontend:
     build:
       context: udacity-c2-frontend
-    image: hashemfay/udacity-c2-frontend
+    image: hashemfay/udacity-c2-frontend:latest

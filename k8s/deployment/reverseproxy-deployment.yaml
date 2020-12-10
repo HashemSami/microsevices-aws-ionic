@@ -15,7 +15,7 @@ spec:
         app: reverseproxy
     spec:
       containers:
-        - image: hashemfay/reverse-proxy
+        - image: hashemfay/reverse-proxy:latest
           name: reverseproxy
           imagePullPolicy: Always
           resources:

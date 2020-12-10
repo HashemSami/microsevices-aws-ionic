@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend-feed
-          image: hashemfay/feed-api
+          image: hashemfay/feed-api:latest
           imagePullPolicy: "Always"
           resources:
             requests:
